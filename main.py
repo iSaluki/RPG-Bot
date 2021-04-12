@@ -29,9 +29,7 @@ async def status(ctx):
 @bot.command()
 async def map(ctx):
     async with ctx.typing():
-        subprocess.run("node web.js", shell=True)
-        #await time.sleep(2)
-        
+        subprocess.run("node web.js", shell=True)      
         with open("cache/map.png", "rb") as fh:
             f = discord.File(fh, filename="map.png")
         await ctx.send(file=f)
