@@ -27,12 +27,16 @@ async def status(ctx):
     await ctx.send(embed=embed)
 
 @bot.command()
-async def map(ctx):
+async def map(ctx, arg = ""):
     async with ctx.typing():
-        subprocess.run("node web.js", shell=True)      
-        with open("cache/map.png", "rb") as fh:
-            f = discord.File(fh, filename="map.png")
-        await ctx.send(file=f)
+        allowedArgs = ["","sepia","greyscale","dingy","tint"]
+        if arg in allowedArgs:
+            subprocess.run("node web.js "+arg, shell=True)      
+            with open("cache/map.png", "rb") as fh:
+                f = discord.File(fh, filename="map.png")
+            await ctx.send(file=f)
+        else:
+            await ctx.send("That's not a valid arg!")
 
 @bot.command()
 async def stupid(ctx, *, content:str):
