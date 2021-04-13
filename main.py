@@ -56,9 +56,17 @@ async def map(ctx, *args):
                 invalidArg = True
         if not invalidArg:
             subprocess.run("node web.js "+argsToGo, shell=True)      
-            with open("cache/map.png", "rb") as fh:
-                f = discord.File(fh, filename="map.png")
-            await ctx.send(file=f)
+            #with open("cache/map.png", "rb") as fh:
+                
+                
+            f = discord.File("cache/map.png", filename="image.png")           
+            embed=discord.Embed(title=":map: | Map", color = colour)
+            embed.set_image(url="attachment://image.png")
+            embed.set_footer(text=argsToGo)
+            embed.set_author(name=ctx.message.author, icon_url=ctx.author.avatar_url)
+            await ctx.send(file=f, embed=embed)
+           
+            # await ctx.send(file=f)
         else:
             await ctx.send("That's not a valid arg! Type "+prefix+"args for avaliable arguments")
 
@@ -67,7 +75,7 @@ async def args(ctx):
     embed=discord.Embed(title="Allowed Arguments", color=colour)
     buttons = ""
     for button in allowedButtons:
-        buttons+=button+", "
+        buttons+=button[0].upper()+button[1:]+", "
     buttons = buttons[:-2]
 
     layers = ""
