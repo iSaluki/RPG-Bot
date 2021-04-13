@@ -31,6 +31,8 @@ allowedLayers = ["Texture","Height","Biomes","Cells",
 @bot.event
 async def on_ready():
     print("Logged in")
+    activity = discord.Game(name="For Maps", type=3)
+    await bot.change_presence(status=discord.Status.online, activity=activity)
 
 @bot.command()
 async def status(ctx):
@@ -97,6 +99,7 @@ async def info(ctx):
     embed=discord.Embed(title="Info", description="About the bot", color=colour)
     embed.add_field(name=":tools: | Developer", value="Saluki#7350", inline=False)
     embed.add_field(name=":earth_africa: | Map Generation powered by", value="https://github.com/Azgaar/Fantasy-Map-Generator", inline=True)
+    embed.add_field(name=":ringed_planet: | Testers", value="Chilledtiger999#9580", inline=False)
     embed.set_footer(text="Use "+prefix+"status to see more details")
     await ctx.send(embed=embed)
 
