@@ -38,9 +38,10 @@ async def map(ctx, arg = ""):
                 f = discord.File(fh, filename="map.png")
             await ctx.send(file=f)
         else:
-            await ctx.send("That's not a valid arg!")
+            await ctx.send("That's not a valid arg! Type "+prefix+"args for avaliable arguments")
 
 @bot.command()
+async def args(ctx):
     embed=discord.Embed(title="Allowed Arguments", color=0x0ccfaf)
     embed.add_field(name="Arguments", value=allowedArgs, inline=False)
     embed.set_footer(text="Use any of these after the map command")
