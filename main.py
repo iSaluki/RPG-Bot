@@ -15,7 +15,7 @@ version = "v0.1"
 colour = 0x0ccfaf
 
 bot = commands.Bot(command_prefix=prefix,intents=discord.Intents.all())
-slash = SlashCommand(bot)
+slash = SlashCommand(bot, sync_commands=True)
 
 
 
@@ -26,7 +26,7 @@ allowedLayers = ["Texture","Height","Biomes","Cells",
                  "Religions","Cultures","States","Provinces","Zones",
                  "Borders","Routes","Temp","Ice","Population",
                  "Prec","Emblems","Labels","Icons","Military",
-                 "Markers","Rulers","ScaleBar"]
+                 "Markers","Rulers","Scalebar"]
 
 @bot.event
 async def on_ready():
@@ -49,6 +49,8 @@ async def status(ctx):
 
 @bot.command()
 async def map(ctx, *args):
+        #print("mapfunc: ",args[0])
+        #args = args[0]
     async with ctx.typing():
         invalidArg = False
         argsToGo = ""
@@ -59,10 +61,10 @@ async def map(ctx, *args):
                 argsToGo += "b"+arg.lower()+" "
                 styleButtons += 1
             elif arg[0].upper()+arg[1:].lower() in allowedLayers:
-#                if arg.lower() == "scalebar":
-#                    argsToGo += "ScaleBar"
-#                    return
-                argsToGo += "l"+arg[0].upper()+arg[1:].lower()+" "
+                if arg.lower() == "scalebar":
+                    argsToGo += "ScaleBar"
+                else:
+                    argsToGo += "l"+arg[0].upper()+arg[1:].lower()+" "
             else:
                 invalidArg = True
                 invalidArgs += arg +" "
@@ -78,7 +80,7 @@ async def map(ctx, *args):
             if argsToGo == "":
                  argsToGo = "None"
             embed.set_footer(text="Settings: " + argsToGo)
-            embed.set_author(name=ctx.message.author, icon_url=ctx.author.avatar_url)
+            #embed.set_author(name=ctx.message.author, icon_url=ctx.author.avatar_url)
             await ctx.send(file=f, embed=embed)
             os.remove("cache/"+filename+".png")
            
@@ -89,7 +91,8 @@ async def map(ctx, *args):
                 await ctx.send(invalidArgs+"are not valid arguments. Type "+prefix+"args for avaliable arguments")
 
 @slash.slash(name="map", description="Generate a fantasy map", options=[create_option(name="Settings", description="Add settings, seperated by spaces", option_type=3, required=False)])
-async def slash_map(ctx, args):
+async def slash_map(ctx, *args):
+    print(args)
     await map(ctx, args)
 
 @slash.slash(name="args", description="See all the settings for generating a fantasy map")
