@@ -18,7 +18,6 @@ bot = commands.Bot(command_prefix=prefix,intents=discord.Intents.all())
 slash = SlashCommand(bot, sync_commands=True)
 
 
-
 # Map Generation Variables
 allowedButtons = ["sepia","grayscale","dingy","tint"]
 allowedLayers = ["Texture","Height","Biomes","Cells",
