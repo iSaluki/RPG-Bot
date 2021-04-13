@@ -7,8 +7,11 @@ async def main():
     page = await browser.newPage()
     await page.goto('https://azgaar.github.io/Fantasy-Map-Generator')
     time.sleep(10)
-    await page.click("button.ui-button.ui-corner-all.ui-widget")
-    time.sleep(5)
+    try:
+        await page.click("button.ui-button.ui-corner-all.ui-widget")
+    except:
+        return
+    time.sleep(20)
     await page.screenshot({'path': 'example.png'})
     await browser.close()
 
