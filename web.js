@@ -6,7 +6,7 @@ var myArgs = process.argv.slice(2);
   const page = await browser.newPage();
   await page.goto('https://azgaar.github.io/Fantasy-Map-Generator');
   await new Promise(r => setTimeout(r, 2000));
-  for (let i= 0; i < myArgs.length; i++){
+  for (let i= 1; i < myArgs.length; i++){
     if (myArgs[i].charAt(0) == "b") {
     await page.$eval('button[id='+myArgs[i].substring(1)+']', el => el.click());
     }
@@ -15,6 +15,6 @@ var myArgs = process.argv.slice(2);
       }
   
   }
-  await page.screenshot({ path: 'cache/map.png' });
+  await page.screenshot({ path: 'cache/'+myArgs[0]+'.png' });
   await browser.close();
 })();

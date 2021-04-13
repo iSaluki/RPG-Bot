@@ -1,10 +1,11 @@
 import discord
 from discord.ext import commands
+from discord_slash import SlashCommand, SlashContext
 import random
 import asyncio
 import time
 import subprocess
-
+import os
 
 
 #Global Settings
@@ -12,7 +13,8 @@ prefix = ";"
 version = "v0.1"
 colour = 0x0ccfaf
 
-bot = commands.Bot(command_prefix=prefix)
+bot = commands.Bot(command_prefix=prefix,intents=discord.Intents.all())
+slash = SlashCommand(bot)
 
 
 
@@ -55,19 +57,28 @@ async def map(ctx, *args):
             else:
                 invalidArg = True
         if not invalidArg:
-            subprocess.run("node web.js "+argsToGo, shell=True)      
+            filename = "map" + str(ctx.author.id) + str(random.randint(0,1000))
+            print(filename)
+            subprocess.run("node web.js "+filename+" " + argsToGo, shell=True)      
             #with open("cache/map.png", "rb") as fh:
                 
                 
-            f = discord.File("cache/map.png", filename="image.png")           
+            f = discord.File("cache/"+filename+".png", filename="image.png")           
             embed=discord.Embed(title=":map: | Map", color = colour)
             embed.set_image(url="attachment://image.png")
-            embed.set_footer(text=":gear: | Settings: " + argsToGo)
+            if argsToGo == "":
+                 argsToGo = "None"
+            embed.set_footer(text="Settings: " + argsToGo)
             embed.set_author(name=ctx.message.author, icon_url=ctx.author.avatar_url)
             await ctx.send(file=f, embed=embed)
+            os.remove("cache/"+filename+".png")
            
         else:
             await ctx.send("That's not a valid arg! Type "+prefix+"args for avaliable arguments")
+
+@slash.slash()
+async def fantasymap(ctx, args):
+    await map(ctx, args)
 
 @bot.command()
 async def args(ctx):

@@ -1,0 +1,6 @@
+Python modules:
+- discord.py
+- discord-py-slash-command
+
+NodeJS (NPM) modules:
+- Puppeteer
