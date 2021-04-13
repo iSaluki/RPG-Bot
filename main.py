@@ -9,6 +9,9 @@ version = "v0.1"
 bot = commands.Bot(command_prefix=prefix)
 
 
+# Map Generation Variables
+allowedArgs = ["","sepia","greyscale","dingy","tint"]
+
 @bot.event
 async def on_ready():
     print("Logged in")
@@ -29,7 +32,6 @@ async def status(ctx):
 @bot.command()
 async def map(ctx, arg = ""):
     async with ctx.typing():
-        allowedArgs = ["","sepia","greyscale","dingy","tint"]
         if arg in allowedArgs:
             subprocess.run("node web.js "+arg, shell=True)      
             with open("cache/map.png", "rb") as fh:
@@ -37,6 +39,12 @@ async def map(ctx, arg = ""):
             await ctx.send(file=f)
         else:
             await ctx.send("That's not a valid arg!")
+
+@bot.command()
+    embed=discord.Embed(title="Allowed Arguments", color=0x0ccfaf)
+    embed.add_field(name="Arguments", value=allowedArgs, inline=False)
+    embed.set_footer(text="Use any of these after the map command")
+    await ctx.send(embed=embed)
 
 @bot.command()
 async def stupid(ctx, *, content:str):
