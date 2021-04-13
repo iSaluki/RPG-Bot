@@ -62,11 +62,10 @@ async def map(ctx, *args):
             f = discord.File("cache/map.png", filename="image.png")           
             embed=discord.Embed(title=":map: | Map", color = colour)
             embed.set_image(url="attachment://image.png")
-            embed.set_footer(text=argsToGo)
+            embed.set_footer(text=":gear: | Settings: " + argsToGo)
             embed.set_author(name=ctx.message.author, icon_url=ctx.author.avatar_url)
             await ctx.send(file=f, embed=embed)
            
-            # await ctx.send(file=f)
         else:
             await ctx.send("That's not a valid arg! Type "+prefix+"args for avaliable arguments")
 
