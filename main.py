@@ -59,6 +59,9 @@ async def map(ctx, *args):
                 argsToGo += "b"+arg.lower()+" "
                 styleButtons += 1
             elif arg[0].upper()+arg[1:].lower() in allowedLayers:
+#                if arg.lower() == "scalebar":
+#                    argsToGo += "ScaleBar"
+#                    return
                 argsToGo += "l"+arg[0].upper()+arg[1:].lower()+" "
             else:
                 invalidArg = True
