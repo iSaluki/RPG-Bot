@@ -9,10 +9,11 @@ async def main():
     time.sleep(10)
     try:
         await page.click("button.ui-button.ui-corner-all.ui-widget")
+        await page.click("tint")
     except:
-        return
-    time.sleep(20)
-    await page.screenshot({'path': 'example.png'})
+        print("Failed")
+    time.sleep(5)
+    await page.screenshot({'path': 'cache/map.png'})
     await browser.close()
 
 asyncio.get_event_loop().run_until_complete(main())
