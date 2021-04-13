@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from discord_slash import SlashCommand, SlashContext
+from discord_slash.utils.manage_commands import create_option
 import random
 import asyncio
 import time
@@ -49,16 +50,19 @@ async def map(ctx, *args):
     async with ctx.typing():
         invalidArg = False
         argsToGo = ""
+        invalidArgs = ""
+        styleButtons = 0
         for arg in args:
             if arg.lower() in allowedButtons:
                 argsToGo += "b"+arg.lower()+" "
+                styleButtons += 1
             elif arg[0].upper()+arg[1:].lower() in allowedLayers:
                 argsToGo += "l"+arg[0].upper()+arg[1:].lower()+" "
             else:
                 invalidArg = True
-        if not invalidArg:
+                invalidArgs += arg +" "
+        if not invalidArg and styleButtons <=1:
             filename = "map" + str(ctx.author.id) + str(random.randint(0,1000))
-            print(filename)
             subprocess.run("node web.js "+filename+" " + argsToGo, shell=True)      
             #with open("cache/map.png", "rb") as fh:
                 
@@ -74,11 +78,27 @@ async def map(ctx, *args):
             os.remove("cache/"+filename+".png")
            
         else:
-            await ctx.send("That's not a valid arg! Type "+prefix+"args for avaliable arguments")
+            if styleButtons >1:
+                await ctx.send("You can only use one style at a time!")
+            if invalidArg:
+                await ctx.send(invalidArgs+"are not valid arguments. Type "+prefix+"args for avaliable arguments")
 
-@slash.slash()
-async def fantasymap(ctx, args):
+@slash.slash(name="map", description="Generate a fantasy map", options=[create_option(name="Settings", description="Add settings, seperated by spaces", option_type=3, required=False)])
+async def slash_map(ctx, args):
     await map(ctx, args)
+
+@slash.slash(name="args", description="See all the settings for generating a fantasy map")
+async def slash_args(ctx):
+    await args(ctx)
+
+
+@bot.command()
+async def info(ctx):
+    embed=discord.Embed(title="Info", description="About the bot", color=colour)
+    embed.add_field(name=":tools: | Developer", value="Saluki#7350", inline=False)
+    embed.add_field(name=":earth_africa: | Map Generation powered by", value="https://github.com/Azgaar/Fantasy-Map-Generator", inline=True)
+    embed.set_footer(text="Use "+prefix+"status to see more details")
+    await ctx.send(embed=embed)
 
 @bot.command()
 async def args(ctx):
