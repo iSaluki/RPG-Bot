@@ -20,7 +20,7 @@ bot = commands.Bot(command_prefix=prefix)
 allowedButtons = ["sepia","grayscale","dingy","tint"]
 allowedLayers = ["Texture","Height","Biomes","Cells",
                  "Grid","Coordinates","Compass","Rivers","Relief",
-                 "Religions","Cultures","States","Provicnes","Zones",
+                 "Religions","Cultures","States","Provinces","Zones",
                  "Borders","Routes","Temp","Ice","Population",
                  "Prec","Emblems","Labels","Icons","Military",
                  "Markers","Rulers","ScaleBar"]
