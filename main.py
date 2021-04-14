@@ -5,6 +5,7 @@ from discord_slash.utils.manage_commands import create_option, remove_all_comman
 import random
 import asyncio
 import time
+import datetime
 import subprocess
 import os
 import shutil
@@ -13,11 +14,13 @@ import shutil
 #Clear cache
 shutil.rmtree('cache')
 os.mkdir('cache')
+print ("Cache cleared")
 
 #Global Settings
 prefix = ";"
 version = "v0.1"
 colour = 0x0ccfaf
+bot_owner = 183240527649570816
 
 # Create bot
 
@@ -83,14 +86,6 @@ async def mapping(ctx, args):
         embed.set_image(url="attachment://image.png")
         await ctx.send(file=f, embed=embed)
         os.remove("cache/"+filename+".png")
-
-        if argsToGo == "":
-            argsFooter = "None"
-        else:
-            argsFooter = ""
-            for arg in argsToGo:
-                argsFooter += arg[1:] + " "
-        embed.set_footer(text="Settings: " + argsFooter)
         #embed.set_author(name=ctx.message.author, icon_url=ctx.author.avatar_url)
         
     else:
@@ -112,8 +107,10 @@ async def slash_map(ctx, *args):
     #print("Bob",args)
     if len(args)>0:
         #print("Brian",args[0].split())
+        await ctx.defer()
         await mapping(ctx, args[0].split())
     else:
+        await ctx.defer()
         await mapping(ctx, [])
 
 @slash.slash(name="push",description="Push someone!",options=[create_option(name="User", description="The user you want to push", option_type=6, required=True)])
@@ -131,7 +128,12 @@ async def slash_info(ctx):
 async def slash_status(ctx):
     await status(ctx)
 
-
+@bot.command()
+@commands.is_owner()
+async def setstatus(ctx, args):
+    activity = discord.Game(name=args, type=3)
+    await bot.change_presence(status=discord.Status.online, activity=activity)
+    await ctx.send("Status updated to "+arg1)
 
 @bot.command()
 async def info(ctx):
@@ -139,7 +141,6 @@ async def info(ctx):
     embed.add_field(name=":tools: | Developer", value="Saluki#7350", inline=False)
     embed.add_field(name=":earth_africa: | Map Engine", value="https://github.com/Azgaar/Fantasy-Map-Generator", inline=True)
     embed.add_field(name=":ringed_planet: | Testers", value="Chilledtiger999#9580", inline=False)
-    embed.set_footer(text="Use status to see more details")
     await ctx.send(embed=embed)
 
 @bot.command()
