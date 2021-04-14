@@ -7,11 +7,13 @@ import asyncio
 import time
 import subprocess
 import os
+import shutil
 
 
 
 #Clear cache
-#Not implemented
+shutil.rmtree('cache')
+os.mkdir('cache')
 
 #Global Settings
 prefix = ";"
