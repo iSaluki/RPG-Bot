@@ -117,8 +117,8 @@ async def slash_map(ctx, *args):
         await mapping(ctx, [])
 
 @slash.slash(name="push",description="Push someone!",options=[create_option(name="User", description="The user you want to push", option_type=6, required=True)])
-async def slash_push(ctx):
-    await push(ctx)
+async def slash_push(ctx,user):
+    await push(ctx,user)
 @slash.slash(name="args", description="See all the settings for generating a fantasy map")
 async def slash_args(ctx):
     await args(ctx)
@@ -160,13 +160,39 @@ async def args(ctx):
     await ctx.send(embed=embed)
 
 @bot.command()
-async def push(ctx, *, content:str):
+async def push(ctx, user):
         balance = random.randint(0,1)
         if balance == 0:
-            await ctx.send(content+ " didn't fall over")
+            response = random.randint(0,5)
+            if response == 0:
+                balancetext = "dodged your push!"
+            if response == 1:
+                balancetext = "backfliped over you and evaded your push!"
+            if response == 2:
+                balancetext = "anticipated your move and pushed you over instead!"
+            if response == 3:
+                balancetext = "threw their shoe at you, causing you to fall over!"
+            if response == 4:
+                balancetext = "hugged you, disabling your pushing abilities!"
+            if response == 5:
+                balancetext = "vaulted over you, dabbing as they did it!"
+            await ctx.send(user.name+ " "+balancetext)
 
         elif balance == 1:
-            await ctx.send(content+ " fell over")
+            response = random.randint(0,5)
+            if response == 0:
+                falltext = "has fallen and cannot get up!"
+            if response == 1:
+                falltext = "tried to block your push, but was too slow!"
+            if response == 2:
+                falltext = "fell into a bush!"
+            if response == 3:
+                falltext = "jumped over a cow to try and escape, but fell into a cow pat!"
+            if response == 4:
+                falltext = "didn't see you coming and fell right over!"
+            if response == 5:
+                falltext = "fell over, dropping your birthday cake, should have thought that one through!"
+            await ctx.send(user.name+" "+ falltext)
 
 
 
