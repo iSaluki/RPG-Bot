@@ -173,7 +173,7 @@ async def push(ctx, user):
             if response == 3:
                 balancetext = "threw their shoe at you, causing you to fall over!"
             if response == 4:
-                balancetext = "hugged you, disabling your pushing abilities!"
+                balancetext = "ran after you with a stick!"
             if response == 5:
                 balancetext = "vaulted over you, dabbing as they did it!"
             await ctx.send(user.name+ " "+balancetext)
