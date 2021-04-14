@@ -10,7 +10,6 @@ import os
 import shutil
 
 
-
 #Clear cache
 shutil.rmtree('cache')
 os.mkdir('cache')
@@ -135,7 +134,7 @@ async def slash_status(ctx):
 async def info(ctx):
     embed=discord.Embed(title="Info", description="About the bot", color=colour)
     embed.add_field(name=":tools: | Developer", value="Saluki#7350", inline=False)
-    embed.add_field(name=":earth_africa: | Map Generation powered by", value="https://github.com/Azgaar/Fantasy-Map-Generator", inline=True)
+    embed.add_field(name=":earth_africa: | Map Engine", value="https://github.com/Azgaar/Fantasy-Map-Generator", inline=True)
     embed.add_field(name=":ringed_planet: | Testers", value="Chilledtiger999#9580", inline=False)
     embed.set_footer(text="Use "+prefix+"status to see more details")
     await ctx.send(embed=embed)
