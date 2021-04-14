@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from discord_slash import SlashCommand, SlashContext
-from discord_slash.utils.manage_commands import create_option
+from discord_slash.utils.manage_commands import create_option, remove_all_commands
 import random
 import asyncio
 import time
@@ -120,6 +120,15 @@ async def slash_map(ctx, *args):
 @slash.slash(name="args", description="See all the settings for generating a fantasy map")
 async def slash_args(ctx):
     await args(ctx)
+
+@slash.slash(name="info", description="See information about how the bot was made")
+async def slash_info(ctx):
+    await info(ctx)
+
+@slash.slash(name="status", description="See the status of the bot and debug information")
+async def slash_status(ctx):
+    await status(ctx)
+
 
 
 @bot.command()
