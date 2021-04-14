@@ -116,6 +116,9 @@ async def slash_map(ctx, *args):
     else:
         await mapping(ctx, [])
 
+@slash.slash(name="push",description="Push someone!",options=[create_option(name="User", description="The user you want to push", option_type=6, required=True)])
+async def slash_push(ctx):
+    await push(ctx)
 @slash.slash(name="args", description="See all the settings for generating a fantasy map")
 async def slash_args(ctx):
     await args(ctx)
@@ -136,7 +139,7 @@ async def info(ctx):
     embed.add_field(name=":tools: | Developer", value="Saluki#7350", inline=False)
     embed.add_field(name=":earth_africa: | Map Engine", value="https://github.com/Azgaar/Fantasy-Map-Generator", inline=True)
     embed.add_field(name=":ringed_planet: | Testers", value="Chilledtiger999#9580", inline=False)
-    embed.set_footer(text="Use "+prefix+"status to see more details")
+    embed.set_footer(text="Use status to see more details")
     await ctx.send(embed=embed)
 
 @bot.command()
@@ -157,13 +160,13 @@ async def args(ctx):
     await ctx.send(embed=embed)
 
 @bot.command()
-async def stupid(ctx, *, content:str):
-        stupidity = random.randint(0,1)
-        if stupidity == 0:
-            await ctx.send(content+ " isn't stupid")
+async def push(ctx, *, content:str):
+        balance = random.randint(0,1)
+        if balance == 0:
+            await ctx.send(content+ " didn't fall over")
 
-        elif stupidity == 1:
-            await ctx.send(content+ " is stupid")
+        elif balance == 1:
+            await ctx.send(content+ " fell over")
 
 
 
