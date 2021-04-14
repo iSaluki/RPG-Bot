@@ -9,13 +9,22 @@ import subprocess
 import os
 
 
+
+#Clear cache
+#Not implemented
+
 #Global Settings
 prefix = ";"
 version = "v0.1"
 colour = 0x0ccfaf
 
+# Create bot
+
 bot = commands.Bot(command_prefix=prefix,intents=discord.Intents.all())
 slash = SlashCommand(bot, sync_commands=True)
+
+# Load cogs
+#bot.load_extension("status.py")
 
 
 # Map Generation Variables
@@ -30,7 +39,7 @@ allowedLayers = ["Texture","Height","Biomes","Cells",
 @bot.event
 async def on_ready():
     print("Logged in")
-    activity = discord.Game(name="For Maps", type=3)
+    activity = discord.Game(name="with maps", type=3)
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
 @bot.command()
@@ -46,53 +55,65 @@ async def status(ctx):
     embed.add_field(name="Version", value=version, inline=True)
     await ctx.send(embed=embed)
 
+async def mapping(ctx, args):
+    print("Mapping:", args)
+    invalidArg = False
+    argsToGo = ""
+    invalidArgs = ""
+    styleButtons = 0
+    for arg in args:
+        if arg.lower() in allowedButtons:
+            argsToGo += "b"+arg.lower()+" "
+            styleButtons += 1
+        elif arg[0].upper()+arg[1:].lower() in allowedLayers:
+            if arg.lower() == "scalebar":
+                argsToGo += "ScaleBar"
+            else:
+                argsToGo += "l"+arg[0].upper()+arg[1:].lower()+" "
+        else:
+            invalidArg = True
+            invalidArgs += arg +" "
+    if not invalidArg and styleButtons <=1:
+        filename = "map" + str(ctx.author.id) + str(random.randint(0,1000))
+        subprocess.run("node web.js "+filename+" " + argsToGo, shell=True)      
+
+        f = discord.File("cache/"+filename+".png", filename="image.png")           
+        embed=discord.Embed(title=":map: | Map", color = colour)
+        embed.set_image(url="attachment://image.png")
+        await ctx.send(file=f, embed=embed)
+        os.remove("cache/"+filename+".png")
+
+        if argsToGo == "":
+            argsFooter = "None"
+        else:
+            argsFooter = ""
+            for arg in argsToGo:
+                argsFooter += arg[1:] + " "
+        embed.set_footer(text="Settings: " + argsFooter)
+        #embed.set_author(name=ctx.message.author, icon_url=ctx.author.avatar_url)
+        
+    else:
+        if styleButtons >1:
+            await ctx.send("You can only use one style at a time!")
+        if invalidArg:
+            await ctx.send(invalidArgs+"are not valid arguments. Type "+prefix+"args for avaliable arguments")
+
 @bot.command()
 async def map(ctx, *args):
-        #print("mapfunc: ",args[0])
-        #args = args[0]
+    #print("mapfunc: ",args)
+    #if len(args)>0:
+    #    args = args[0]
     async with ctx.typing():
-        invalidArg = False
-        argsToGo = ""
-        invalidArgs = ""
-        styleButtons = 0
-        for arg in args:
-            if arg.lower() in allowedButtons:
-                argsToGo += "b"+arg.lower()+" "
-                styleButtons += 1
-            elif arg[0].upper()+arg[1:].lower() in allowedLayers:
-                if arg.lower() == "scalebar":
-                    argsToGo += "ScaleBar"
-                else:
-                    argsToGo += "l"+arg[0].upper()+arg[1:].lower()+" "
-            else:
-                invalidArg = True
-                invalidArgs += arg +" "
-        if not invalidArg and styleButtons <=1:
-            filename = "map" + str(ctx.author.id) + str(random.randint(0,1000))
-            subprocess.run("node web.js "+filename+" " + argsToGo, shell=True)      
-            #with open("cache/map.png", "rb") as fh:
-                
-                
-            f = discord.File("cache/"+filename+".png", filename="image.png")           
-            embed=discord.Embed(title=":map: | Map", color = colour)
-            embed.set_image(url="attachment://image.png")
-            if argsToGo == "":
-                 argsToGo = "None"
-            embed.set_footer(text="Settings: " + argsToGo)
-            #embed.set_author(name=ctx.message.author, icon_url=ctx.author.avatar_url)
-            await ctx.send(file=f, embed=embed)
-            os.remove("cache/"+filename+".png")
-           
-        else:
-            if styleButtons >1:
-                await ctx.send("You can only use one style at a time!")
-            if invalidArg:
-                await ctx.send(invalidArgs+"are not valid arguments. Type "+prefix+"args for avaliable arguments")
+        await mapping(ctx, args)
 
 @slash.slash(name="map", description="Generate a fantasy map", options=[create_option(name="Settings", description="Add settings, seperated by spaces", option_type=3, required=False)])
 async def slash_map(ctx, *args):
-    print(args)
-    await map(ctx, args)
+    #print("Bob",args)
+    if len(args)>0:
+        #print("Brian",args[0].split())
+        await mapping(ctx, args[0].split())
+    else:
+        await mapping(ctx, [])
 
 @slash.slash(name="args", description="See all the settings for generating a fantasy map")
 async def slash_args(ctx):
