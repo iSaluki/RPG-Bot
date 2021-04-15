@@ -1,6 +1,6 @@
-# MapBot
+# RPG-Bot
 
-Discord bot for generating maps
+Discord bot for RPG game API and generating maps
 
 
 # Dependencies
