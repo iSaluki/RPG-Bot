@@ -31,14 +31,13 @@ async def slash_move(ctx, *args):
         "command": "move",
         "args": args,
     }
-    response = requests.post(url, json = content)
-    print(response.content)
-    content = json.loads(response.content)
-    print(content)
-    print(content["args"], content["args"][0], args[0])
-    if content["command"]=="move" and content["args"][0]==args[0]:
+    await send_post(ctx, content)
+
+async def send_post(ctx, toSend):
+    response = requests.post(url, json = toSend)
+    received = json.loads(response.content)
+    if toSend["command"]==received["command"] and toSend["args"][0]==received["args"][0]:
         await ctx.send("OK")
     else:
         await ctx.send("API error")
-
 bot.run("NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM")
