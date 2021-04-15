@@ -24,13 +24,14 @@ async def on_ready():
 
 @slash.slash(name="move", description="Move your character in the game", options=[create_option(name="Direction", description="Provide a direction to move.", option_type=3, required=False)], guild_ids=[697477880938102925])
 async def slash_move(ctx, *args):
-    
+
     content ={
         "user": str(ctx.author_id),
         "command": "move",
         "args": args,
     }
     response = requests.post(url, json = content)
+    print(response.content)
     if response.ok:
         await ctx.send("OK")
     else:
