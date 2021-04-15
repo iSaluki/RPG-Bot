@@ -34,8 +34,8 @@ content ={
     "text": "user.Move('blacksmith', '47657463563456')"
 }
 
-requests.post(url, json = content)
-
+x = requests.post(url, json = content)
+print(x)
 # Create bot
 
 bot = commands.Bot(command_prefix=prefix,intents=discord.Intents.all())
