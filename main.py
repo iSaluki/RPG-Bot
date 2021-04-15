@@ -11,28 +11,21 @@ import os
 import shutil
 import requests
 
-
-#Clear cache
-try:
-    shutil.rmtree('cache')
-    os.mkdir('cache')
-    print ("Cache cleared")
-except:
-    os.mkdir('cache')
-    print ("Cache cleared")
-
 #Global Settings
 prefix = ";"
 version = "v0.1"
-colour = 0x0ccfaf
-bot_owner = 183240527649570816
 
 # API Test
-
 url = "http://127.0.0.1:5000/post"
-content ={
-    "text": "bob"
-}
+
+@slash.slash(name="move", description="Move your character in the game", options=[create_option(name="Direction", description="Provide a direction to move.", option_type=3, required=False)])
+async def slash_move(ctx, *args):
+    content ={
+        "user": str(ctx.user.id),
+        "command": "move",
+        "args": args,
+    }
+
 
 x = requests.post(url, json = content)
 print(x)
