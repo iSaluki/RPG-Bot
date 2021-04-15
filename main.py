@@ -31,7 +31,7 @@ bot_owner = 183240527649570816
 
 url = "http://127.0.0.1:5000/post"
 content ={
-    "text": "Post Example"
+    "text": "user.Move('blacksmith', '47657463563456')"
 }
 
 requests.post(url, json = content)
