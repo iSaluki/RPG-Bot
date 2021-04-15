@@ -30,9 +30,11 @@ bot_owner = 183240527649570816
 # API Test
 
 url = "http://127.0.0.1:5000/post"
-content = {'text': 'Bill'}
+content ={
+    "text": "Post Example"
+}
 
-requests.post(url, data = content)
+requests.post(url, json = content)
 
 # Create bot
 
