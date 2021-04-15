@@ -32,7 +32,7 @@ async def slash_move(ctx, *args):
     }
     response = requests.post(url, json = content)
     print(response.content)
-    if response.ok:
+    if response.content["command"]=="move" and response.content["args"]==args:
         await ctx.send("OK")
     else:
         await ctx.send("API error")
