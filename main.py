@@ -11,7 +11,8 @@ prefix = ";"
 version = "v0.1"
 
 # API Test
-url = "http://127.0.0.1:5000/post"
+geturl = "http://127.0.0.1:5000/get"
+posturl = "http://127.0.0.1:5000/post"
 
 # Create bot
 bot = commands.Bot(command_prefix=prefix,intents=discord.Intents.all())
@@ -32,9 +33,13 @@ async def slash_move(ctx, *args):
         "args": args,
     }
     await send_post(ctx, content)
+    
+    newStatus = requests.get(geturl)
+    print(newStatus.content)
+    await ctx.send(str(newStatus.content, "UTF-8"))
 
 async def send_post(ctx, toSend):
-    response = requests.post(url, json = toSend)
+    response = requests.post(posturl, json = toSend)
     received = json.loads(response.content)
     if toSend["command"]==received["command"] and toSend["args"][0]==received["args"][0]:
         await ctx.send("OK")
