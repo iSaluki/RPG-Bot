@@ -4,6 +4,7 @@ from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option
 import random
 import requests
+import json
 
 #Global Settings
 prefix = ";"
@@ -32,7 +33,10 @@ async def slash_move(ctx, *args):
     }
     response = requests.post(url, json = content)
     print(response.content)
-    if response.content["command"]=="move" and response.content["args"]==args:
+    content = json.loads(response.content)
+    print(content)
+    print(content["args"], content["args"][0], args[0])
+    if content["command"]=="move" and content["args"][0]==args[0]:
         await ctx.send("OK")
     else:
         await ctx.send("API error")
