@@ -34,7 +34,7 @@ async def slash_move(ctx, *args):
     }
     await send_post(ctx, content)
     
-    newStatus = requests.get(geturl)
+    newStatus = requests.get(geturl, params={"user":str(ctx.author_id)})
     await ctx.send(str(newStatus.content, "UTF-8"))
 
 async def send_post(ctx, toSend):
