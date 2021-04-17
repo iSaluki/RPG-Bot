@@ -11,8 +11,9 @@ prefix = ";"
 version = "v0.1"
 
 # API Test
-geturl = "http://127.0.0.1:5000/get"
-posturl = "http://127.0.0.1:5000/post"
+domain = "https://rpg-bot-api-dyxwi.ondigitalocean.app"
+geturl = domain + "/get"
+posturl = domain + "/post"
 
 # Create bot
 bot = commands.Bot(command_prefix=prefix,intents=discord.Intents.all())
