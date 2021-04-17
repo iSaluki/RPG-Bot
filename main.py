@@ -25,7 +25,7 @@ async def on_ready():
     activity = discord.Game(name="with a cool new game", type=3)
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
-@slash.slash(name="move", description="Move your character in the game", options=[create_option(name="Direction", description="Provide a direction to move.", option_type=3, required=False)], guild_ids=[697477880938102925])
+@slash.slash(name="move", description="Move your character in the game", options=[create_option(name="Direction", description="Provide a direction to move.", option_type=3, required=False)])
 async def slash_move(ctx, *args):
 
     content ={
