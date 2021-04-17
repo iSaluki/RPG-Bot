@@ -42,8 +42,7 @@ async def send_post(ctx, toSend):
     response = requests.post(posturl, json = toSend)
     received = json.loads(response.content)
     if toSend["command"]==received["command"] and toSend["args"][0]==received["args"][0]:
-        #await ctx.send("OK")
-        pass
+        await ctx.send(received["reply"])
     else:
         await ctx.send("API error")
 bot.run("NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM")
