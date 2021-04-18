@@ -54,7 +54,7 @@ async def send_post(ctx, to_send):
     received = json.loads(response.content)
     logging.debug(f"{asctime()} SEND_POST: received = {received}")
     if to_send["command"]==received["command"] and to_send["args"][0]==received["args"][0]:
-        logging.debug(f"{asctime()} SEND_POST: SUCCESS reply = {received["reply"]}")
+        logging.debug(f"{asctime()} SEND_POST: SUCCESS reply = {received['reply']}")
         await ctx.send(received["reply"])
     else:
         logging.debug(f"{asctime()} SEND_POST: API ERROR")
