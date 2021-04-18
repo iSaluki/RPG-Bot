@@ -10,9 +10,9 @@ import json
 prefix = ";"
 version = "v0.1"
 
-ENVIROMENT = "production"
+PRODUCTION = True
 
-if ENVIROMENT == "production":
+if PRODUCTION:
     domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
     token = "ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA"
 else:
