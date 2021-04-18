@@ -27,12 +27,12 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
 @slash.slash(name="move", description="Move your character in the game", options=[create_option(name="Direction", description="Provide a direction to move.", option_type=3, required=True)])
-async def slash_move(ctx, *args):
+async def slash_move(ctx, direction):
 
     content ={
         "user": str(ctx.author_id),
         "command": "move",
-        "args": args,
+        "args": direction,
     }
     await send_post(ctx, content)
     
