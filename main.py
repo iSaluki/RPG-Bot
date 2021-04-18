@@ -11,8 +11,8 @@ prefix = ";"
 version = "v0.1"
 
 # API Test
-domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
-#domain = "http://localhost:8080"
+#domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
+domain = "http://localhost:8080"
 geturl = domain + "/get"
 posturl = domain + "/post"
 
@@ -36,12 +36,13 @@ async def slash_move(ctx, *args):
     }
     await send_post(ctx, content)
     
-    newStatus = requests.get(geturl, params={"user":str(ctx.author_id)})
-    await ctx.send(str(newStatus.content, "UTF-8"))
+    #newStatus = requests.get(geturl, params={"user":str(ctx.author_id)})
+    #await ctx.send(str(newStatus.content, "UTF-8"))
 
 async def send_post(ctx, toSend):
     response = requests.post(posturl, json = toSend)
     received = json.loads(response.content)
+    print(received)
     if toSend["command"]==received["command"] and toSend["args"][0]==received["args"][0]:
         await ctx.send(received["reply"])
     else:
