@@ -47,4 +47,10 @@ async def send_post(ctx, toSend):
         await ctx.send(received["reply"])
     else:
         await ctx.send("API error")
-bot.run("NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM")
+
+
+# Dev bot        
+#bot.run("NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM")
+
+# Production bot
+bot.run("ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA")
