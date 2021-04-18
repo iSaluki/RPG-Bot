@@ -10,7 +10,7 @@ import json
 prefix = ";"
 version = "v0.1"
 
-PRODUCTION = True
+PRODUCTION = False
 
 if PRODUCTION:
     domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
@@ -41,6 +41,7 @@ async def slash_move(ctx, direction):
         "command": "move",
         "args": direction,
     }
+    await ctx.defer()
     await send_post(ctx, content)
     
     #newStatus = requests.get(geturl, params={"user":str(ctx.author_id)})
