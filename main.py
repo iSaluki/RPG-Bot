@@ -11,8 +11,8 @@ prefix = ";"
 version = "v0.1"
 
 # API Test
-#domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
-domain = "http://localhost:8080"
+domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
+#domain = "http://localhost:8080"
 geturl = domain + "/get"
 posturl = domain + "/post"
 
