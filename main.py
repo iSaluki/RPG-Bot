@@ -10,9 +10,16 @@ import json
 prefix = ";"
 version = "v0.1"
 
-# API Test
-domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
-#domain = "http://localhost:8080"
+ENVIROMENT = production
+
+if ENVIROMENT == production:
+    domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
+    token = "ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA"
+else:
+    domain = "http://localhost:8080"
+    token = "NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM"
+
+# API Config
 geturl = domain + "/get"
 posturl = domain + "/post"
 
@@ -23,7 +30,7 @@ slash = SlashCommand(bot, sync_commands=True)
 @bot.event
 async def on_ready():
     print("Logged in")
-    activity = discord.Game(name="with a cool new game", type=3)
+    activity = discord.Game(name="try /move", type=3)
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
 @slash.slash(name="move", description="Move your character in the game", options=[create_option(name="Direction", description="Provide a direction to move.", option_type=3, required=True)])
@@ -49,8 +56,4 @@ async def send_post(ctx, toSend):
         await ctx.send("API error")
 
 
-# Dev bot        
-#bot.run("NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM")
-
-# Production bot
-bot.run("ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA")
+bot.run(token)
