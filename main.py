@@ -49,6 +49,18 @@ async def slash_move(ctx, direction):
     await send_post(ctx, content)
 
 
+@slash.slash(name="location", description="Get details about your current location")
+async def slash_location(ctx):
+
+    content ={
+        "user": str(ctx.author_id),
+        "command": "location",
+    }
+    logging.debug(f"{asctime()} SLASH_LOCATION: content = {content}")
+    await ctx.defer()
+    await send_post(ctx, content)
+
+
 async def send_post(ctx, to_send):
     response = requests.post(posturl, json = to_send)
     received = json.loads(response.content)
