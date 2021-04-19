@@ -14,11 +14,17 @@ version = "v0.1"
 PRODUCTION = True
 COLOUR = 0x0fb1b3
 
+
+# Emojis
+
+x_emoji = "<:X_:833700097903689728>"
+
+
 if PRODUCTION:
-    domain = "https://rpg-bot-6ptoc.ondigitalocean.app/api"
+    domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
     token = "ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA"
 else:
-    domain = "http://localhost:8080"
+    domain = "http://0.0.0.0:8080"
     token = "NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM"
 
 # API Config
@@ -33,12 +39,12 @@ slash = SlashCommand(bot, sync_commands=True)
 @bot.event
 async def on_ready():
     print("Logged in")
-    activity = discord.Game(name="try /move", type=3)
+    activity = discord.Game(name="/help", type=3)
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
 
 # Yet to be implemented
-@slash.slash(name="buy", description="Buy something from a character in the game - you may need money")
+@slash.slash(name="buy", description="Buy something from a vendor with money", options=[create_option(name="item", description="The item you want to buy", option_type=3, required=True)])
 async def slash_buy(ctx):
 
     content ={
@@ -64,7 +70,7 @@ async def slash_drop(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="fight", description="Have a fight with a character in the game")
+@slash.slash(name="fight", description="Fight a monster or a player")
 async def slash_fight(ctx):
 
     content ={
@@ -77,7 +83,7 @@ async def slash_fight(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="get", description="Pick an object up and put it in your inventory")
+@slash.slash(name="get", description="Pick up a nearby object")
 async def slash_get(ctx):
 
     content ={
@@ -89,8 +95,13 @@ async def slash_get(ctx):
     await send_post(ctx, content)
 
 
+@slash.slash(name="help", description="Provide help printout for commands and the game")
+async def slash_help(ctx):
+    await ctx.send(x_emoji+"This menu is currently in development and will be functional soon. For now, please just use slash commands. Start a message with a `/` and then pick a command from the list. Message Saluki#7350 for more help.")
+
+
 # Yet to be implemented
-@slash.slash(name="inventory", description="List the items being carried")
+@slash.slash(name="inventory", description="Show your inventory")
 async def slash_inventory(ctx):
 
     content ={
@@ -114,7 +125,7 @@ async def slash_location(ctx):
     await send_post(ctx, content)
 
 
-@slash.slash(name="move", description="Move your character in the game", options=[create_option(name="Direction", description="Provide a direction to move.", option_type=3, required=True)])
+@slash.slash(name="move", description="Move to a different location", options=[create_option(name="Direction", description="Provide a direction to move.", option_type=3, required=True)])
 async def slash_move(ctx, direction):
 
     content ={
@@ -128,7 +139,7 @@ async def slash_move(ctx, direction):
 
 
 # Yet to be implemented
-@slash.slash(name="open", description="Open an object in the map - you may need a key or similar")
+@slash.slash(name="open", description="Open something, might require a key")
 async def slash_open(ctx):
 
     content ={
@@ -141,7 +152,7 @@ async def slash_open(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="sell", description="Sell something to a character in the game")
+@slash.slash(name="sell", description="Sell something")
 async def slash_sell(ctx):
 
     content ={
@@ -154,7 +165,7 @@ async def slash_sell(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="trade", description="Trade something with a character in the game - you may need something to trade with")
+@slash.slash(name="trade", description="Trade with a player or vendor")
 async def slash_trade(ctx):
 
     content ={
