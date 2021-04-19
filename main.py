@@ -32,7 +32,7 @@ geturl = domain + "/get"
 posturl = domain + "/post"
 
 # Create bot
-bot = commands.Bot(command_prefix=prefix,intents=discord.Intents.all())
+bot = commands.Bot(command_prefix=prefix,intents=discord.Intents.none())
 slash = SlashCommand(bot, sync_commands=True)
 
 
