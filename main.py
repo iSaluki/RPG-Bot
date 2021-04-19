@@ -57,7 +57,7 @@ async def slash_buy(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="drop", description="Remove an item from your inventory and leave it here")
+@slash.slash(name="drop", description="Drop an item at your current location")
 async def slash_drop(ctx):
 
     content ={
@@ -70,7 +70,7 @@ async def slash_drop(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="fight", description="Fight a monster or a player")
+@slash.slash(name="fight", description="Fight a monster ,a player ...or something else")
 async def slash_fight(ctx):
 
     content ={
@@ -152,7 +152,7 @@ async def slash_open(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="sell", description="Sell something")
+@slash.slash(name="sell", description="Sell your items to a vendor", options=[create_option(name="item", description="The item you want to sell", option_type=3, required=True)])
 async def slash_sell(ctx):
 
     content ={
@@ -178,7 +178,7 @@ async def slash_trade(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="use", description="Use an item from your inventory")
+@slash.slash(name="use", description="Use an item from your inventory",options=[create_option(name="item", description="The item you want to use", option_type=3, required=True)])
 async def slash_use(ctx):
 
     content ={
