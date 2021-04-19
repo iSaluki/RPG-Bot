@@ -15,7 +15,7 @@ PRODUCTION = True
 COLOUR = 0x0fb1b3
 
 if PRODUCTION:
-    domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
+    domain = "https://rpg-bot-6ptoc.ondigitalocean.app/api"
     token = "ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA"
 else:
     domain = "http://localhost:8080"
