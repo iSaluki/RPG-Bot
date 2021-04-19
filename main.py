@@ -14,6 +14,12 @@ version = "v0.1"
 PRODUCTION = True
 COLOUR = 0x0fb1b3
 
+
+# Emojis
+
+x_emoji = "<:X_:833700097903689728>"
+
+
 if PRODUCTION:
     domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
     token = "ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA"
@@ -91,7 +97,7 @@ async def slash_get(ctx):
 
 @slash.slash(name="help", description="Provide help printout for commands and the game")
 async def slash_help(ctx):
-    await ctx.send("This menu is currently in development and will be functional soon. For now, please just use slash commands. Start a message with a `/` and then pick a command from the list. Message Saluki#7350 for more help.")
+    await ctx.send(x_emoji+"This menu is currently in development and will be functional soon. For now, please just use slash commands. Start a message with a `/` and then pick a command from the list. Message Saluki#7350 for more help.")
 
 
 # Yet to be implemented
