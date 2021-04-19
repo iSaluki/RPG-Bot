@@ -194,14 +194,16 @@ async def send_post(ctx, to_send):
     response = requests.post(posturl, json = to_send)
     received = json.loads(response.content)
     logging.debug(f"{asctime()} SEND_POST: received = {received}")
-    if to_send["command"]==received["command"] and to_send["args"][0]==received["args"][0]:
-        logging.debug(f"{asctime()} SEND_POST: SUCCESS reply = {received['reply']}")
-        await ctx.send(received["reply"])
-      #  embed = discord.Embed(description=received["reply"], color = COLOUR)
-      #  await ctx.send(embed)
+    if to_send["command"]==received["command"]:
+        if "args" not in to_send or to_send["args"][0]==received["args"][0]:
+            logging.debug(f"{asctime()} SEND_POST: SUCCESS reply = {received['reply']}")
+            await ctx.send(received["reply"])
+        else:
+            logging.warning(f"{asctime()} SEND_POST: API ERROR args returned do not match args sent")
+            await ctx.send("API error. If this happens a lot, please report it.")
     else:
-        logging.debug(f"{asctime()} SEND_POST: API ERROR")
-        await ctx.send("API error")
+        logging.warning(f"{asctime()} SEND_POST: API ERROR command returned does not match command sent")
+        await ctx.send("API error. If this happens a lot, please report it.")
 
 
 bot.run(token)
