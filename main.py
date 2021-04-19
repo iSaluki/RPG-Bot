@@ -21,10 +21,10 @@ x_emoji = "<:X_:833700097903689728>"
 
 
 if PRODUCTION:
-    domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
+    domain = "https://rpg-bot-6ptoc.ondigitalocean.app/api"
     token = "ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA"
 else:
-    domain = "http://0.0.0.0:8080"
+    domain = "http://0.0.0.0:8080/api"
     token = "NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM"
 
 # API Config
