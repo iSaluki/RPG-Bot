@@ -15,10 +15,10 @@ PRODUCTION = True
 COLOUR = 0x0fb1b3
 
 if PRODUCTION:
-    domain = "https://rpg-bot-6ptoc.ondigitalocean.app/api"
+    domain = "https://rpg-bot-6ptoc.ondigitalocean.app"
     token = "ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA"
 else:
-    domain = "http://0.0.0.0:8080/api"
+    domain = "http://0.0.0.0:8080"
     token = "NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM"
 
 # API Config
