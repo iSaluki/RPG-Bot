@@ -186,8 +186,8 @@ async def send_post(ctx, to_send):
     if to_send["command"]==received["command"] and to_send["args"][0]==received["args"][0]:
         logging.debug(f"{asctime()} SEND_POST: SUCCESS reply = {received['reply']}")
         await ctx.send(received["reply"])
-        embed = discord.Embed(description=received["reply"], color = COLOUR)
-        await ctx.send(embed)
+      #  embed = discord.Embed(description=received["reply"], color = COLOUR)
+      #  await ctx.send(embed)
     else:
         logging.debug(f"{asctime()} SEND_POST: API ERROR")
         await ctx.send("API error")
