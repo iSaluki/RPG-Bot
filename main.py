@@ -36,6 +36,83 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
 
+# Yet to be implemented
+@slash.slash(name="buy", description="Buy something from a character in the game - you may need money")
+async def slash_buy(ctx):
+
+    content ={
+        "user": str(ctx.author_id),
+        "command": "buy",
+    }
+    logging.debug(f"{asctime()} SLASH_BUY: content = {content}")
+    await ctx.defer()
+    await send_post(ctx, content)
+
+
+# Yet to be implemented
+@slash.slash(name="drop", description="Remove an item from your inventory and leave it here")
+async def slash_drop(ctx):
+
+    content ={
+        "user": str(ctx.author_id),
+        "command": "drop",
+    }
+    logging.debug(f"{asctime()} SLASH_DROP: content = {content}")
+    await ctx.defer()
+    await send_post(ctx, content)
+
+
+# Yet to be implemented
+@slash.slash(name="fight", description="Have a fight with a character in the game")
+async def slash_fight(ctx):
+
+    content ={
+        "user": str(ctx.author_id),
+        "command": "fight",
+    }
+    logging.debug(f"{asctime()} SLASH_FIGHT: content = {content}")
+    await ctx.defer()
+    await send_post(ctx, content)
+
+
+# Yet to be implemented
+@slash.slash(name="get", description="Pick an object up and put it in your inventory")
+async def slash_get(ctx):
+
+    content ={
+        "user": str(ctx.author_id),
+        "command": "get",
+    }
+    logging.debug(f"{asctime()} SLASH_GET: content = {content}")
+    await ctx.defer()
+    await send_post(ctx, content)
+
+
+# Yet to be implemented
+@slash.slash(name="inventory", description="List the items being carried")
+async def slash_inventory(ctx):
+
+    content ={
+        "user": str(ctx.author_id),
+        "command": "inventory",
+    }
+    logging.debug(f"{asctime()} SLASH_INVENTORY: content = {content}")
+    await ctx.defer()
+    await send_post(ctx, content)
+
+
+@slash.slash(name="location", description="Get details about your current location")
+async def slash_location(ctx):
+
+    content ={
+        "user": str(ctx.author_id),
+        "command": "location",
+    }
+    logging.debug(f"{asctime()} SLASH_LOCATION: content = {content}")
+    await ctx.defer()
+    await send_post(ctx, content)
+
+
 @slash.slash(name="move", description="Move your character in the game", options=[create_option(name="Direction", description="Provide a direction to move.", option_type=3, required=True)])
 async def slash_move(ctx, direction):
 
@@ -49,14 +126,54 @@ async def slash_move(ctx, direction):
     await send_post(ctx, content)
 
 
-@slash.slash(name="location", description="Get details about your current location")
-async def slash_location(ctx):
+# Yet to be implemented
+@slash.slash(name="open", description="Open an object in the map - you may need a key or similar")
+async def slash_open(ctx):
 
     content ={
         "user": str(ctx.author_id),
-        "command": "location",
+        "command": "open",
     }
-    logging.debug(f"{asctime()} SLASH_LOCATION: content = {content}")
+    logging.debug(f"{asctime()} SLASH_OPEN: content = {content}")
+    await ctx.defer()
+    await send_post(ctx, content)
+
+
+# Yet to be implemented
+@slash.slash(name="sell", description="Sell something to a character in the game")
+async def slash_sell(ctx):
+
+    content ={
+        "user": str(ctx.author_id),
+        "command": "sell",
+    }
+    logging.debug(f"{asctime()} SLASH_SELL: content = {content}")
+    await ctx.defer()
+    await send_post(ctx, content)
+
+
+# Yet to be implemented
+@slash.slash(name="trade", description="Trade something with a character in the game - you may need something to trade with")
+async def slash_trade(ctx):
+
+    content ={
+        "user": str(ctx.author_id),
+        "command": "trade",
+    }
+    logging.debug(f"{asctime()} SLASH_TRADE: content = {content}")
+    await ctx.defer()
+    await send_post(ctx, content)
+
+
+# Yet to be implemented
+@slash.slash(name="use", description="Use an item from your inventory")
+async def slash_use(ctx):
+
+    content ={
+        "user": str(ctx.author_id),
+        "command": "use",
+    }
+    logging.debug(f"{asctime()} SLASH_USE: content = {content}")
     await ctx.defer()
     await send_post(ctx, content)
 
