@@ -57,9 +57,9 @@ async def slash_bstat(ctx):
     latency = str(bot.latency * 1000)[:7] + "ms"
 
     embed=discord.Embed(title="Bot Stats", description="Basic information about the bot status", color=COLOUR)
-    embed.add_field(name=Shard, value=shard, inline=True)
-    embed.add_field(name=Latency, value=latency, inline=True)
-    embed.add_field(name=Version, value=version, inline=True)
+    embed.add_field(name="Shard", value=shard, inline=True)
+    embed.add_field(name="Latency", value=latency, inline=True)
+    embed.add_field(name="Version", value=version, inline=True)
     await ctx.send(embed=embed)
 
 # Yet to be implemented
