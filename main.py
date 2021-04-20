@@ -13,7 +13,7 @@ prefix = ";"
 version = "v0.1"
 PRODUCTION = True
 COLOUR = 0x0fb1b3
-SHARDING = True
+SHARDING = False
 
 
 
