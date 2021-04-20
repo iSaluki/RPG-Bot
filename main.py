@@ -37,6 +37,7 @@ if SHARDING:
     BotType = commands.AutoShardedBot
 else:
     BotType = commands.Bot
+
 bot = BotType(command_prefix=prefix,intents=discord.Intents.all())
 slash = SlashCommand(bot, sync_commands=True)
 
@@ -47,6 +48,17 @@ async def on_ready():
     activity = discord.Game(name="/help", type=3)
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
+@slash.slash(name="bstat", description="Get bot information")
+async def slash_bstat(ctx):
+
+    shard = "No shard detected" if str(bot.shard_id) == "None" else  str(bot.shard_id) + "/" + str(bot.shard_count)
+    latency = str(bot.latency * 1000)[:7] + "ms"
+
+    embed=discord.Embed(title="Bot Stats", description="Basic information about the bot status", color=COLOUR)
+    embed.add_field(name=Shard, value=shard, inline=True)
+    embed.add_field(name=Latency, value=latency, inline=True)
+    embed.add_field(name=Version, value=version, inline=True)
+    await ctx.send(embed=embed)
 
 # Yet to be implemented
 @slash.slash(name="buy", description="Buy something from a vendor with money", options=[create_option(name="item", description="The item you want to buy", option_type=3, required=True)])
