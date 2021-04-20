@@ -13,7 +13,7 @@ prefix = ";"
 version = "v0.1"
 PRODUCTION = True
 COLOUR = 0x0fb1b3
-
+SHARDING = True
 
 # Emojis
 
@@ -32,7 +32,12 @@ geturl = domain + "/get"
 posturl = domain + "/post"
 
 # Create bot
-bot = commands.Bot(command_prefix=prefix,intents=discord.Intents.all())
+
+if SHARDING:
+    BotType = commands.AutoShardedBot
+else:
+    BotType = commands.Bot
+bot = BotType(command_prefix=prefix,intents=discord.Intents.all())
 slash = SlashCommand(bot, sync_commands=True)
 
 
