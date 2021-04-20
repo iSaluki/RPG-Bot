@@ -54,7 +54,7 @@ async def on_ready():
 async def slash_bstat(ctx):
 
     shard = "Not sharded" if str(bot.shard_id) == "None" else  str(bot.shard_id) + "/" + str(bot.shard_count)
-    latency = str(bot.latency * 1000)[:9] + "ms"
+    latency = str(bot.latency * 1000)[:3] + "ms"
 
     embed=discord.Embed(title="Bot Stats", description="Basic information about the bot status", color=COLOUR)
     embed.add_field(name="Shard", value=shard, inline=True)
