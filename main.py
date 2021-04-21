@@ -11,11 +11,11 @@ import logging
 logging.basicConfig(filename="bot.log", level=logging.DEBUG)
 prefix = ";"
 version = "v0.1"
-PRODUCTION = True
+PRODUCTION = False
 COLOUR = 0x0fb1b3
 SHARDING = False
 
-
+authToken = "eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.MqF1AKsJkijKnfqEI3VA1OnzAL2S4eIpAuievMgD3tEFyFMU67gCbg-fxsc5dLrxNwdZEXs9h0kkicJZ70mp6p5vdv-j2ycDKBWg05Un4OhEl7lYcdIsCsB8QUPmstF-lQWnNqnq3wra1GynJrOXDL27qIaJnnQKlXuayFntBF0j-82jpuVdMaSXvk3OGaOM-7rCRsBcSPmocaAO-uWJEGPw_OWVaC5RRdWDroPi4YL4lTkDEC-KEvVkqCnFm_40C-T_siXquh5FVbpJjb3W2_YvcqfDRj44TsRrpVhk6ohsHMNeUad_cxnFnpolIKnaXq_COv35e9EgeQIPAbgIeg"
 
 # Emojis
 
@@ -36,7 +36,7 @@ posturl = domain + "/post"
 # Create bot
 
 if SHARDING:
-    BotType = commands.AutoShardedBot
+    BotType = commands.AutoShardedBot(shard_count=8, shard_ids=[0, 1, 2, 3])
 else:
     BotType = commands.Bot
 
@@ -210,7 +210,8 @@ async def slash_use(ctx):
 
 
 async def send_post(ctx, to_send):
-    response = requests.post(posturl, json = to_send)
+    AuthHeader = {'Authentication': authToken}
+    response = requests.post(posturl, json = to_send, headers=AuthHeader)
     received = json.loads(response.content)
     logging.debug(f"{asctime()} SEND_POST: received = {received}")
     if to_send["command"]==received["command"]:
