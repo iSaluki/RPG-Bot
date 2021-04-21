@@ -40,7 +40,7 @@ posturl = domain + "/post"
 # Create bot
 
 if SHARDING:
-    BotType = commands.AutoShardedBot(shard_count=8, shard_ids=[0, 1, 2, 3])
+    BotType = commands.ShardedBot(command_prefix=prefix,intents=discord.Intents.all(),shard_count=8, shard_ids=[0, 1, 2, 3])
 else:
     BotType = commands.Bot
 
