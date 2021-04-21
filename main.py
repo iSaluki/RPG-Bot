@@ -12,18 +12,10 @@ import logging
 logging.basicConfig(filename="bot.log", level=logging.DEBUG)
 
 
-envProd = os.environ.get('PRODUCTION')
-logging.debug(f"{asctime()} ENVIRONMENT: Trying to get PRODUCTION")
-if envProd == True:
-    PRODUCTION = True
-    logging.debug(f"{asctime()} ENVIRONMENT: Found PRODUCTION, set it to True")
-else:
-    PRODUCTION = False
-    logging.debug(f"{asctime()} ENVIRONMENT: Unable to find PRODUCTION, set it to False")
 
 prefix = ";"
 version = "v0.1"
-#PRODUCTION = True
+PRODUCTION = True
 COLOUR = 0x0fb1b3
 SHARDING = False
 
