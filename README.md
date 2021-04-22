@@ -8,3 +8,7 @@ Production Bot: https://discord.com/api/oauth2/authorize?client_id=8332566988387
 # Discord Server
 https://discord.gg/DAv8gKz4RS
 
+
+# Project Management
+
+[GitHub Link](https://github.com/users/iSaluki/projects/2)
