@@ -132,7 +132,7 @@ async def slash_search(ctx):
     await send_post(ctx, content)
 
 
-@slash.slash(name="help", description="Provide help printout for commands and the game")
+@slash.slash(name="help", description="Provide help for the game")
 async def slash_help(ctx):
     reply = x_emoji+"This menu is currently in development and will be functional soon. For now, please just use slash commands. Start a message with a `/` and then pick a command from the list. Message Saluki#7350 for more help."
     cmdName = "help"
