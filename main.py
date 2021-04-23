@@ -56,7 +56,7 @@ async def ConstructEmbed(reply, cmdName, ctx):
     logging.debug(f"{asctime()} EMBED: reply is: ", reply)
     embed=discord.Embed(title=cmdName,description=reply, color=COLOUR)
     embed.timestamp = datetime.datetime.utcnow()
-    
+
     return embed
     logging.debug(f"{asctime()} EMBED: Returning embed variable: ", embed)
 
@@ -134,7 +134,9 @@ async def slash_search(ctx):
 
 @slash.slash(name="help", description="Provide help printout for commands and the game")
 async def slash_help(ctx):
-    await ConstructEmbed(x_emoji+"This menu is currently in development and will be functional soon. For now, please just use slash commands. Start a message with a `/` and then pick a command from the list. Message Saluki#7350 for more help.")
+    reply = x_emoji+"This menu is currently in development and will be functional soon. For now, please just use slash commands. Start a message with a `/` and then pick a command from the list. Message Saluki#7350 for more help."
+    cmdName = "help"
+    await ConstructEmbed(reply, cmdName, ctx)
     await ctx.send(embed=embed)
 
 # Yet to be implemented
