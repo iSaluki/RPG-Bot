@@ -56,15 +56,7 @@ async def ConstructEmbed(reply, cmdName, ctx):
     logging.debug(f"{asctime()} EMBED: reply is: ", reply)
     embed=discord.Embed(title=cmdName,description=reply, color=COLOUR)
     embed.timestamp = datetime.datetime.utcnow()
-   
-    avatar = ctx.author.avatar_url
-    # Not supported by discord-py-slash-commands (can be achieved with a slightly more complex solution, using the user id and discord.py)
-    name = ctx.author.name
-    logging.debug
-   # embed.set_author(avatar, name)
-    embed.set_footer(name)
-    logging.debug(f"{asctime()} EMBED: name is: ", name)
-    logging.debug(f"{asctime()} EMBED: avatar is: ", avatar)
+    
     return embed
     logging.debug(f"{asctime()} EMBED: Returning embed variable: ", embed)
 
