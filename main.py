@@ -50,9 +50,10 @@ bot = BotType(command_prefix=prefix,intents=discord.Intents.all())
 slash = SlashCommand(bot, sync_commands=True)
 
 
-async def ConstructEmbed(reply):
+async def ConstructEmbed(reply, cmdName):
+    cmdName = cmdName.capitalize()
     logging.debug(f"{asctime()} EMBED: reply is: ", reply)
-    embed=discord.Embed(description=reply, color=COLOUR)
+    embed=discord.Embed(title=cmdName,description=reply, color=COLOUR)
     embed.timestamp = datetime.datetime.utcnow()
 
     return embed
@@ -235,7 +236,8 @@ async def send_post(ctx, to_send):
             logging.debug(f"{asctime()} SEND_POST: SUCCESS reply = {received['reply']}")
             logging.debug("REPLY TO EMBED: "+received["reply"])
             reply = received["reply"]
-            embed = await ConstructEmbed(reply)
+            cmdName = received["command"]
+            embed = await ConstructEmbed(reply, cmdName)
             await ctx.send(embed=embed)
         else:
             logging.warning(f"{asctime()} SEND_POST: API ERROR args returned do not match args sent")
