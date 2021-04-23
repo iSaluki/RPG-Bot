@@ -59,7 +59,7 @@ async def ConstructEmbed(reply, cmdName, ctx):
    
     #avatar = ctx.user.avatar_url
     # Not supported by discord-py-slash-commands (can be achieved with a slightly more complex solution, using the user id and discord.py)
-    name = ctx.name
+    name = ctx.author.name
    # embed.set_author(avatar, name)
     embed.set_footer(name)
 
