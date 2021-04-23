@@ -51,11 +51,14 @@ bot = BotType(command_prefix=prefix,intents=discord.Intents.all())
 slash = SlashCommand(bot, sync_commands=True)
 
 
-async def ConstructEmbed(reply, cmdName):
+async def ConstructEmbed(reply, cmdName, ctx):
     cmdName = cmdName.capitalize()
     logging.debug(f"{asctime()} EMBED: reply is: ", reply)
     embed=discord.Embed(title=cmdName,description=reply, color=COLOUR)
     embed.timestamp = datetime.datetime.utcnow()
+    #Set Author would put their username and profile picture on top of the message
+    #embed.set_author(ctx.author)
+    embed.set_footer(ctx.message.author.name)
 
     return embed
     logging.debug(f"{asctime()} EMBED: Returning embed variable: ", embed)
@@ -238,7 +241,7 @@ async def send_post(ctx, to_send):
             logging.debug("REPLY TO EMBED: "+received["reply"])
             reply = received["reply"]
             cmdName = received["command"]
-            embed = await ConstructEmbed(reply, cmdName)
+            embed = await ConstructEmbed(reply, cmdName, ctx)
             await ctx.send(embed=embed)
         else:
             logging.warning(f"{asctime()} SEND_POST: API ERROR args returned do not match args sent")
