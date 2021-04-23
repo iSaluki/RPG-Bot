@@ -58,7 +58,7 @@ async def ConstructEmbed(reply, cmdName, ctx):
     embed.timestamp = datetime.datetime.utcnow()
    
     #avatar = ctx.user.avatar_url
-    # Not supported by discord-py-slash-commands
+    # Not supported by discord-py-slash-commands (can be achieved with a slightly more complex solution, using the user id and discord.py)
     name = ctx.name
    # embed.set_author(avatar, name)
     embed.set_footer(name)
