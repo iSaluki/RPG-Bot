@@ -30,7 +30,8 @@ if PRODUCTION:
     domain = "https://rpg-bot-6ptoc.ondigitalocean.app/api"
     token = "ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA"
 else:
-    domain = "http://0.0.0.0:8080/api"
+    #domain = "http://0.0.0.0:8080/api"
+    domain = "https://rpg-bot-6ptoc.ondigitalocean.app/api"
     token = "NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM"
 
 # API Config
@@ -50,16 +51,16 @@ slash = SlashCommand(bot, sync_commands=True)
 
 
 async def ConstructEmbed(reply):
-    print(reply)
+    logging.debug(f"{asctime()} EMBED: reply is: ", reply)
     embed=discord.Embed(description=reply, color=COLOUR)
-
+    logging.debug(f"{asctime()} EMBED: Returning embed variable: ", embed)
 
 @bot.event
 async def on_ready():
-    print("Logged in")
+    logging.debug(f"{asctime()} LOGIN: Bot has logged in")
     activity = discord.Game(name="/help", type=3)
     await bot.change_presence(status=discord.Status.online, activity=activity)
-    print(bot.shard_id,bot.shard_count)
+    logging.debug(f"{asctime()} LOGIN: Status updated")
 
 
 @slash.slash(name="bstat", description="Get bot information")
@@ -229,8 +230,9 @@ async def send_post(ctx, to_send):
     if to_send["command"]==received["command"]:
         if "args" not in to_send or to_send["args"][0]==received["args"][0]:
             logging.debug(f"{asctime()} SEND_POST: SUCCESS reply = {received['reply']}")
+            logging.debug("REPLY TO EMBED: "+received["reply"])
             reply = received["reply"]
-            embed = ConstructEmbed(reply)
+            embed = await ConstructEmbed(reply)
             await ctx.send(embed=embed)
         else:
             logging.warning(f"{asctime()} SEND_POST: API ERROR args returned do not match args sent")
