@@ -57,8 +57,9 @@ async def ConstructEmbed(reply, cmdName, ctx):
     embed=discord.Embed(title=cmdName,description=reply, color=COLOUR)
     embed.timestamp = datetime.datetime.utcnow()
     #Set Author would put their username and profile picture on top of the message
-    #embed.set_author(ctx.author)
-    embed.set_footer(ctx.message.author.name)
+    embed.set_author(ctx.author)
+    
+    #embed.set_footer(ctx.message.author.name)
 
     return embed
     logging.debug(f"{asctime()} EMBED: Returning embed variable: ", embed)
