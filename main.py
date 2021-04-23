@@ -50,6 +50,7 @@ slash = SlashCommand(bot, sync_commands=True)
 
 
 async def ConstructEmbed(reply):
+    print(reply)
     embed=discord.Embed(description=reply, color=COLOUR)
 
 
