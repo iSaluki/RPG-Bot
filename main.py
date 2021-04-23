@@ -40,7 +40,8 @@ posturl = domain + "/post"
 # Create bot
 
 if SHARDING:
-    BotType = commands.ShardedBot(command_prefix=prefix,intents=discord.Intents.all(),shard_count=8, shard_ids=[0, 1, 2, 3])
+    BotType = commands.AutoShardedBot
+    #,shard_count=8, shard_ids=[0, 1, 2, 3]
 else:
     BotType = commands.Bot
 
@@ -53,6 +54,8 @@ async def on_ready():
     print("Logged in")
     activity = discord.Game(name="/help", type=3)
     await bot.change_presence(status=discord.Status.online, activity=activity)
+    print(bot.shard_id,bot.shard_count)
+
 
 @slash.slash(name="bstat", description="Get bot information")
 async def slash_bstat(ctx):
@@ -106,14 +109,14 @@ async def slash_fight(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="get", description="Pick up a nearby object")
-async def slash_get(ctx):
+@slash.slash(name="search", description="Search the area for interesting objects")
+async def slash_search(ctx):
 
     content ={
         "user": str(ctx.author_id),
-        "command": "get",
+        "command": "search",
     }
-    logging.debug(f"{asctime()} SLASH_GET: content = {content}")
+    logging.debug(f"{asctime()} SLASH_SEARCH: content = {content}")
     await ctx.defer()
     await send_post(ctx, content)
 
