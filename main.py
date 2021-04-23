@@ -54,7 +54,7 @@ async def ConstructEmbed(reply):
     logging.debug(f"{asctime()} EMBED: reply is: ", reply)
     embed=discord.Embed(description=reply, color=COLOUR)
 
-    
+
     return embed
     logging.debug(f"{asctime()} EMBED: Returning embed variable: ", embed)
 
@@ -132,8 +132,8 @@ async def slash_search(ctx):
 
 @slash.slash(name="help", description="Provide help printout for commands and the game")
 async def slash_help(ctx):
-    await ctx.send(x_emoji+"This menu is currently in development and will be functional soon. For now, please just use slash commands. Start a message with a `/` and then pick a command from the list. Message Saluki#7350 for more help.")
-
+    await ConstructEmbed(x_emoji+"This menu is currently in development and will be functional soon. For now, please just use slash commands. Start a message with a `/` and then pick a command from the list. Message Saluki#7350 for more help.")
+    await ctx.send(embed=embed)
 
 # Yet to be implemented
 @slash.slash(name="inventory", description="Show your inventory")
