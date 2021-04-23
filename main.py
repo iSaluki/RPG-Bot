@@ -53,7 +53,7 @@ slash = SlashCommand(bot, sync_commands=True)
 async def ConstructEmbed(reply):
     logging.debug(f"{asctime()} EMBED: reply is: ", reply)
     embed=discord.Embed(description=reply, color=COLOUR)
-
+    embed.timestamp = datetime.datetime.utcnow()
 
     return embed
     logging.debug(f"{asctime()} EMBED: Returning embed variable: ", embed)
