@@ -49,6 +49,10 @@ bot = BotType(command_prefix=prefix,intents=discord.Intents.all())
 slash = SlashCommand(bot, sync_commands=True)
 
 
+async def ConstructEmbed(reply):
+    embed=discord.Embed(description=reply, color=COLOUR)
+
+
 @bot.event
 async def on_ready():
     print("Logged in")
@@ -224,7 +228,9 @@ async def send_post(ctx, to_send):
     if to_send["command"]==received["command"]:
         if "args" not in to_send or to_send["args"][0]==received["args"][0]:
             logging.debug(f"{asctime()} SEND_POST: SUCCESS reply = {received['reply']}")
-            await ctx.send(received["reply"])
+            reply = received["reply"]
+            embed = ConstructEmbed(reply)
+            await ctx.send(embed=embed)
         else:
             logging.warning(f"{asctime()} SEND_POST: API ERROR args returned do not match args sent")
             await ctx.send("API error. If this happens a lot, please report it.")
