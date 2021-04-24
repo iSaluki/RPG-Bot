@@ -95,12 +95,14 @@ async def slash_buy(ctx):
 
 # Yet to be implemented
 @slash.slash(name="drop", description="Drop an item at your current location", options=[create_option(name="Item", description="The item you want to drop", option_type=3, required=True)])
-async def slash_drop(ctx):
+async def slash_drop(ctx, item):
 
     content ={
         "user": str(ctx.author_id),
         "command": "drop",
+        "args": item,
     }
+    
     logging.debug(f"{asctime()} SLASH_DROP: content = {content}")
     await ctx.defer()
     await send_post(ctx, content)
@@ -121,11 +123,12 @@ async def slash_fight(ctx):
 
 # Yet to be implemented
 @slash.slash(name="pickup", description="Pickup a nearby object", options=[create_option(name="Item", description="The item you want to pickup", option_type=3, required=True)])
-async def slash_pickup(ctx):
+async def slash_pickup(ctx, item):
 
     content ={
         "user": str(ctx.author_id),
         "command": "pickup",
+        "args": item,
     }
     logging.debug(f"{asctime()} SLASH_PICKUP: content = {content}")
     await ctx.defer()
