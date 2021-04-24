@@ -94,7 +94,7 @@ async def slash_buy(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="drop", description="Drop an item at your current location")
+@slash.slash(name="drop", description="Drop an item at your current location", options=[create_option(name="Item", description="The item you want to drop", option_type=3, required=True)])
 async def slash_drop(ctx):
 
     content ={
@@ -120,7 +120,7 @@ async def slash_fight(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="pickup", description="Pickup a nearby object")
+@slash.slash(name="pickup", description="Pickup a nearby object", options=[create_option(name="Item", description="The item you want to pickup", option_type=3, required=True)])
 async def slash_pickup(ctx):
 
     content ={
