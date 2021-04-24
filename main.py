@@ -120,14 +120,14 @@ async def slash_fight(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="search", description="Search the area for interesting objects")
-async def slash_search(ctx):
+@slash.slash(name="pickup", description="Pickup a nearby object")
+async def slash_pickup(ctx):
 
     content ={
         "user": str(ctx.author_id),
-        "command": "search",
+        "command": "pickup",
     }
-    logging.debug(f"{asctime()} SLASH_SEARCH: content = {content}")
+    logging.debug(f"{asctime()} SLASH_PICKUP: content = {content}")
     await ctx.defer()
     await send_post(ctx, content)
 
