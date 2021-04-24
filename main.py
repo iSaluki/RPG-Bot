@@ -240,7 +240,6 @@ async def send_post(ctx, to_send):
     if to_send["command"]==received["command"]:
         if "args" not in to_send or to_send["args"][0]==received["args"][0]:
             logging.debug(f"{asctime()} SEND_POST: SUCCESS reply = {received['reply']}")
-            logging.debug("REPLY TO EMBED: "+received["reply"])
             reply = received["reply"]
             cmdName = received["command"]
             embed = await ConstructEmbed(reply, cmdName, ctx)
