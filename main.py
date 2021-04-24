@@ -12,8 +12,6 @@ import datetime
 
 logging.basicConfig(filename="bot.log", level=logging.DEBUG)
 
-
-
 prefix = ";"
 version = "v0.1"
 PRODUCTION = True
@@ -23,7 +21,6 @@ SHARDING = False
 authToken = "eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.MqF1AKsJkijKnfqEI3VA1OnzAL2S4eIpAuievMgD3tEFyFMU67gCbg-fxsc5dLrxNwdZEXs9h0kkicJZ70mp6p5vdv-j2ycDKBWg05Un4OhEl7lYcdIsCsB8QUPmstF-lQWnNqnq3wra1GynJrOXDL27qIaJnnQKlXuayFntBF0j-82jpuVdMaSXvk3OGaOM-7rCRsBcSPmocaAO-uWJEGPw_OWVaC5RRdWDroPi4YL4lTkDEC-KEvVkqCnFm_40C-T_siXquh5FVbpJjb3W2_YvcqfDRj44TsRrpVhk6ohsHMNeUad_cxnFnpolIKnaXq_COv35e9EgeQIPAbgIeg"
 
 # Emojis
-
 x_emoji = "<:X_:833700097903689728>"
 
 
@@ -60,6 +57,7 @@ async def ConstructEmbed(reply, cmdName, ctx):
     return embed
     logging.debug(f"{asctime()} EMBED: Returning embed variable: ", embed)
 
+
 @bot.event
 async def on_ready():
     logging.debug(f"{asctime()} LOGIN: Bot has logged in")
@@ -80,20 +78,21 @@ async def slash_bstat(ctx):
     embed.add_field(name="Version", value=version, inline=True)
     await ctx.send(embed=embed)
 
+
 # Yet to be implemented
-@slash.slash(name="buy", description="Buy something from a vendor with money", options=[create_option(name="item", description="The item you want to buy", option_type=3, required=True)])
-async def slash_buy(ctx):
+@slash.slash(name="buy", description="Buy something from a vendor with money", options=[create_option(name="Item", description="The item you want to buy", option_type=3, required=True)])
+async def slash_buy(ctx, item):
 
     content ={
         "user": str(ctx.author_id),
         "command": "buy",
+        "args": item,
     }
     logging.debug(f"{asctime()} SLASH_BUY: content = {content}")
     await ctx.defer()
     await send_post(ctx, content)
 
 
-# Yet to be implemented
 @slash.slash(name="drop", description="Drop an item at your current location", options=[create_option(name="Item", description="The item you want to drop", option_type=3, required=True)])
 async def slash_drop(ctx, item):
 
@@ -121,7 +120,6 @@ async def slash_fight(ctx):
     await send_post(ctx, content)
 
 
-# Yet to be implemented
 @slash.slash(name="pickup", description="Pickup a nearby object", options=[create_option(name="Item", description="The item you want to pickup", option_type=3, required=True)])
 async def slash_pickup(ctx, item):
 
@@ -142,7 +140,7 @@ async def slash_help(ctx):
     embed = await ConstructEmbed(reply, cmdName, ctx)
     await ctx.send(embed=embed)
 
-# Yet to be implemented
+
 @slash.slash(name="inventory", description="Show your inventory")
 async def slash_inventory(ctx):
 
@@ -194,7 +192,7 @@ async def slash_open(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="sell", description="Sell your items to a vendor", options=[create_option(name="item", description="The item you want to sell", option_type=3, required=True)])
+@slash.slash(name="sell", description="Sell your items to a vendor", options=[create_option(name="Item", description="The item you want to sell", option_type=3, required=True)])
 async def slash_sell(ctx):
 
     content ={
@@ -220,12 +218,13 @@ async def slash_trade(ctx):
 
 
 # Yet to be implemented
-@slash.slash(name="use", description="Use an item from your inventory",options=[create_option(name="item", description="The item you want to use", option_type=3, required=True)])
-async def slash_use(ctx):
+@slash.slash(name="use", description="Use an item from your inventory",options=[create_option(name="Item", description="The item you want to use", option_type=3, required=True)])
+async def slash_use(ctx, item):
 
     content ={
         "user": str(ctx.author_id),
         "command": "use",
+        "args": item,
     }
     logging.debug(f"{asctime()} SLASH_USE: content = {content}")
     await ctx.defer()
