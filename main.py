@@ -133,11 +133,16 @@ async def slash_pickup(ctx, item):
     await send_post(ctx, content)
 
 
-@slash.slash(name="help", description="Provide help for the game")
+@slash.slash(name="help", description="Get help")
 async def slash_help(ctx):
-    reply = x_emoji+"This menu is currently in development and will be functional soon. For now, please just use slash commands. Start a message with a `/` and then pick a command from the list. Message Saluki#7350 for more help."
-    cmdName = "help"
-    embed = await ConstructEmbed(reply, cmdName, ctx)
+    
+    embed=discord.Embed(title="Help",description="If you need help with the bot or the game, please look at the options below!", color=COLOUR)
+    embed.add_field(name="Support Server", value="[Join here](https://discord.gg/aq37JpbZpR)", inline=False)
+    embed.add_field(name="Technical or Billing support", value="Contact Saluki#7350 or seth@salukicorporation.com")
+    embed.add_field(name="Suggestions and bug reports", value="See the #feedback channel in the support server")
+    embed.set_footer(text="If you're unsure which option is right for you, join the support server and ask there.")
+    embed.timestamp = datetime.datetime.utcnow()
+    #embed = await ConstructEmbed(reply, cmdName, ctx)
     await ctx.send(embed=embed)
 
 
