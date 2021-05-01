@@ -137,7 +137,7 @@ async def slash_pickup(ctx, item):
 async def slash_help(ctx):
     
     embed=discord.Embed(title="Help",description="If you need help with the bot or the game, please look at the options below!", color=COLOUR)
-    embed.add_field(name="Support Server", value="[Join here](https://discord.gg/aq37JpbZpR)", inline=False)
+    embed.add_field(name="Support Server", value="[Join here](https://discord.gg/aq37JpbZpR)")
     embed.add_field(name="Technical or Billing support", value="Contact Saluki#7350 or seth@salukicorporation.com")
     embed.add_field(name="Suggestions and bug reports", value="See the #feedback channel in the support server")
     embed.set_footer(text="If you're unsure which option is right for you, join the support server and ask there.")
