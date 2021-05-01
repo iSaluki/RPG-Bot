@@ -13,7 +13,7 @@ import datetime
 logging.basicConfig(filename="bot.log", level=logging.DEBUG)
 
 prefix = ";"
-version = "v0.1"
+version = "v0.1.1"
 PRODUCTION = True
 COLOUR = 0x0fb1b3
 SHARDING = False
