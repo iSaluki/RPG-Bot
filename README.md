@@ -2,6 +2,8 @@
 
 Discord bot for RPG game API and generating maps
 
+All API keys in this project are invalid or discared, and will therefore not be of any use. Emojis will need updating to match new ones that your bot has access to.
+
 API: https://github.com/iSaluki/RPG-Bot-API
 
 # Invite link
