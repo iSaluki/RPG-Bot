@@ -18,19 +18,19 @@ PRODUCTION = True
 COLOUR = 0x0fb1b3
 SHARDING = False
 
-authToken = "eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.MqF1AKsJkijKnfqEI3VA1OnzAL2S4eIpAuievMgD3tEFyFMU67gCbg-fxsc5dLrxNwdZEXs9h0kkicJZ70mp6p5vdv-j2ycDKBWg05Un4OhEl7lYcdIsCsB8QUPmstF-lQWnNqnq3wra1GynJrOXDL27qIaJnnQKlXuayFntBF0j-82jpuVdMaSXvk3OGaOM-7rCRsBcSPmocaAO-uWJEGPw_OWVaC5RRdWDroPi4YL4lTkDEC-KEvVkqCnFm_40C-T_siXquh5FVbpJjb3W2_YvcqfDRj44TsRrpVhk6ohsHMNeUad_cxnFnpolIKnaXq_COv35e9EgeQIPAbgIeg"
+authToken = "DEFAULT DISCORD BOT TOKEN"
 
 # Emojis
 x_emoji = "<:X_:833700097903689728>"
 
 
 if PRODUCTION:
-    domain = "https://rpg-bot-6ptoc.ondigitalocean.app/api"
-    token = "ODMzMjU2Njk4ODM4Nzc3ODg2.YHvsxg.PdcTHAVtQzlqRb2-hCBZUHL_0CA"
+    domain = "https://production-api-address.com/api"
+    token = "Production bot token"
 else:
     #domain = "http://0.0.0.0:8080/api"
-    domain = "https://rpg-bot-6ptoc.ondigitalocean.app/api"
-    token = "NzQ4OTM5MTQ0ODM0NTgwNDkw.X0kt7g.G8ewY4O9AvsoXuPGH42Jy6O9euM"
+    domain = "https://testing-api-address.com/api"
+    token = "Testing bot token"
 
 # API Config
 geturl = domain + "/get"
