@@ -18,7 +18,7 @@ PRODUCTION = True
 COLOUR = 0x0fb1b3
 SHARDING = False
 
-authToken = "DEFAULT DISCORD BOT TOKEN"
+authToken = "Your own token that corresponds to the one you set on the API"
 
 # Emojis
 x_emoji = "<:X_:833700097903689728>"
