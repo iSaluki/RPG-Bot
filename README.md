@@ -1,3 +1,6 @@
+# NOTE: None of the private keys or endpoints in this repository are still active.
+
+---
 # RPG-Bot
 
 Discord bot for RPG game API and generating maps
